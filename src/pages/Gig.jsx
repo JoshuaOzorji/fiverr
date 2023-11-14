@@ -74,7 +74,7 @@ const gig = () => {
 					I can help you to create a vision you have through a textual
 					description of your scene without requiring any reference images.
 					<br />
-					Some things I've found it often excels at are: Character portraits
+					{`Some things I've found it often excels at are: Character portraits
 					(E.g. a picture to go with your DnD character) Landscapes (E.g.
 					wallpapers, illustrations to compliment a story) Logos (E.g. Esports
 					team, business, profile picture) You can be as vague or as descriptive
@@ -83,7 +83,7 @@ const gig = () => {
 					incredibly precise if you have a clear image of what you want in mind.
 					All of the images I create are original and will be found nowhere
 					else. If you have any questions you're more than welcome to send me a
-					message.
+					message.`}
 				</h3>
 				<div className=''>
 					<div className='flex flex-col gap-3'>
