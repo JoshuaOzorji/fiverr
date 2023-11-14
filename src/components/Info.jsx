@@ -10,7 +10,7 @@ const Info = () => {
 			{/* TEXT */}
 			<section className='md:w-[45%]'>
 				<h1 className='text-2xl md:text-4xl font-bold mb-6'>
-					The best part? Everything.
+					The best part? Everything...
 				</h1>
 
 				{info.map((item, id) => (
