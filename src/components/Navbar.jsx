@@ -1,9 +1,10 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import BusinessSolutions from "./BusinessSolutions";
 import { useEffect, useState } from "react";
 import { submenuLinks } from "../data.jsx";
 import { AiOutlineMenu } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
+import newRequest from "../utils/newRequest.js";
 
 const Navbar = () => {
 	const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -28,12 +29,19 @@ const Navbar = () => {
 		};
 	}, []);
 
-	const currentUser = {
-		id: 1,
-		username: "Anna",
-		isSeller: true,
-	};
+	const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
+	const navigate = useNavigate();
+
+	const handleLogout = async () => {
+		try {
+			await newRequest.post("/auth/logout");
+			localStorage.setItem("currentUser", null);
+			navigate("/");
+		} catch (err) {
+			console.log(err);
+		}
+	};
 	return (
 		<main className=''>
 			{/* MD SCREEN*/}
@@ -62,8 +70,7 @@ const Navbar = () => {
 								className='flex items-center cursor-pointer relative gap-2'
 								onClick={() => setOpen(!open)}>
 								<img
-									src='https://images.pexels.com/photos/1115697/pexels-photo-1115697.jpeg?auto=compress&cs=tinysrgb&w=1600'
-									alt='user image'
+									src={currentUser.img || "/noavatar.jpg"}
 									className='w-8 h-8 object-cover rounded-full'
 								/>
 								<span>{currentUser?.username}</span>
@@ -82,7 +89,7 @@ const Navbar = () => {
 											<Link className='cursor-pointer' to='/messages'>
 												Messages
 											</Link>
-											<Link className='cursor-pointer' to='/'>
+											<Link className='cursor-pointer' onClick={handleLogout}>
 												Logout
 											</Link>
 										</div>
@@ -170,7 +177,7 @@ const Navbar = () => {
 					</Link>
 				</div>
 
-				<p>Join</p>
+				<Link to='/register'>Join</Link>
 			</section>
 		</main>
 	);
